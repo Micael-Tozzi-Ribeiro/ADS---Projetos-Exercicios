@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #lista-produtos {
+            margin-top: 20px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .item-produto {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .item-produto button {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .item-produto button:hover {
+            background-color: rgb(247, 0, 0);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Compras</h1>
+
+    <input type="text" id="input-item" placeholder="Digite o item" />
+    <button onclick="adicionarProduto()">Adicionar</button>
+
+    <ul id="lista-produtos"></ul>
+
+    <script src="lista.js">
+
+    </script>
+
+</body>
+</html>
