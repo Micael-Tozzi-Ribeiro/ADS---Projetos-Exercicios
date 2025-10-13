@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Transformação 2D com matriz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px 25px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a73e8;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        label input[type="number"] {
+            flex-shrink: 0;
+            width: 80px;
+            margin-left: 10px;
+            padding: 7px 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+        }
+
+        label input[type="number"]:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 6px rgba(26, 115, 232, 0.3);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            padding: 12px 0;
+            font-size: 18px;
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #155ab6;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            background: #e8f0fe;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #c6dafc;
+            font-size: 17px;
+            color: #1a237e;
+            text-align: center;
+            box-shadow: inset 0 0 8px rgba(26, 115, 232, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Transformação 2D - Escala</h1>
+
+    <form id="formTransform">
+        <fieldset>
+            <legend>Digite as coordenadas dos 3 pontos:</legend>
+            <label>
+                Ponto 1: X <input type="number" step="any" id="x1" value="1" /> Y <input type="number" step="any"
+                    id="y1" value="1" />
+            </label>
+            <label>
+                Ponto 2: X <input type="number" step="any" id="x2" value="2" /> Y <input type="number" step="any"
+                    id="y2" value="2" />
+            </label>
+            <label>
+                Ponto 3: X <input type="number" step="any" id="x3" value="3" /> Y <input type="number" step="any"
+                    id="y3" value="3" />
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Fator de escala:</legend>
+            <label>
+                Escala <input type="number" step="any" id="scale" value="2" />
+            </label>
+        </fieldset>
+
+        <button type="submit">Aplicar Escala</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script src="matrizes2.js">
+
+    </script>
+
+</body>
+
+</html>
