@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLAR DEFENDER</title>
+
+    <link rel="stylesheet" href="jogo.css">
+    
+</head>
+
+<body>
+
+    <canvas id="stars"></canvas>
+
+    <!-- ══ MENU ══════════════════════════════════ -->
+    <div id="screen-menu" class="screen active">
+        <div class="vcenter-wrap">
+            <div class="menu-title">
+                <span class="menu-icon">☀️</span>
+                <span class="menu-tag">— ARCADE —</span>
+                <span class="menu-line">SOLAR</span>
+                <span class="menu-line">DEFENDER</span>
+                <span class="menu-sub">PROTECT YOUR PANEL</span>
+            </div>
+            <div class="menu-btns">
+                <button class="abtn abtn-yellow" onclick="goGame(1)">▶ JOGAR AGORA</button>
+                <button class="abtn abtn-green" onclick="showScreen('screen-levels')">★ ESCOLHER FASE</button>
+                <button class="abtn abtn-blue" onclick="showScreen('screen-how')">? COMO JOGAR</button>
+            </div>
+            <div class="menu-footer">— INSERT COIN TO CONTINUE —</div>
+        </div>
+    </div>
+
+    <!-- ══ HOW TO PLAY ════════════════════════════ -->
+    <div id="screen-how" class="screen">
+        <div class="vcenter-wrap">
+            <div class="box" style="margin-top:8px">
+                <div class="box-title box-title-yellow">COMO JOGAR</div>
+
+                <div class="how-row">
+                    <div class="how-icon">🕹️</div>
+                    <div class="how-text">
+                        <strong>CONTROLES</strong>
+                        <p>Mova o painel pelo labirinto usando as teclas abaixo.</p>
+                        <div class="key-row">
+                            <span class="key">W</span><span class="key">A</span><span class="key">S</span><span
+                                class="key">D</span>
+                            <span style="color:rgba(255,255,255,0.3);font-size:10px;align-self:center">ou</span>
+                            <span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span
+                                class="key">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="how-row">
+                    <div class="how-icon">⚡</div>
+                    <div class="how-text">
+                        <strong>ENERGIA — 10 PTS</strong>
+                        <p>Colete todos os raios dourados para completar a fase. Cada raio te deixa um pouco mais
+                            rápido!</p>
+                    </div>
+                </div>
+
+                <div class="how-row">
+                    <div class="how-icon">🔋</div>
+                    <div class="how-text">
+                        <strong>BATERIA — 50 PTS + ESCUDO</strong>
+                        <p>Ativa escudo temporário. Com ele você pode destruir inimigos ao tocar neles. Eles ficam azuis
+                            com medo!</p>
+                    </div>
+                </div>
+
+                <div class="how-row">
+                    <div class="how-icon">☁️</div>
+                    <div class="how-text">
+                        <strong>INIMIGOS</strong>
+                        <p>Nuvem, Granizo, Fumaça e Relâmpago. Cada um age diferente. Ficam mais rápidos a cada fase!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="how-row">
+                    <div class="how-icon">💀</div>
+                    <div class="how-text">
+                        <strong>VIDAS</strong>
+                        <p>Você tem 3 vidas. Ser atingido sem escudo custa uma vida. Zerar = Game Over.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="abtn-ghost" onclick="showScreen('screen-menu')">◀ VOLTAR AO MENU</button>
+        </div>
+    </div>
+
+    <!-- ══ LEVEL SELECT ═══════════════════════════ -->
+    <div id="screen-levels" class="screen">
+        <div class="vcenter-wrap">
+            <div class="box box-green" style="margin-top:8px">
+                <div class="box-title box-title-green">ESCOLHER FASE</div>
+                <div class="levels-grid" id="levels-grid"></div>
+            </div>
+            <button class="abtn-ghost" onclick="showScreen('screen-menu')" style="margin-top:8px">◀ VOLTAR AO
+                MENU</button>
+        </div>
+    </div>
+
+    <!-- ══ GAME ══════════════════════════════════ -->
+    <div id="screen-game" class="screen">
+        <div id="game-scaler">
+            <div id="hud">
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="sval">0</span>
+                </div>
+                <div class="hud-sep"></div>
+                <div class="hud-item">
+                    <span class="hud-label">FASE</span>
+                    <span class="hud-value" id="lval">1</span>
+                </div>
+                <div class="hud-sep"></div>
+                <div class="hud-item">
+                    <span class="hud-label">VIDAS</span>
+                    <div id="lives-display"></div>
+                </div>
+                <div class="hud-sep"></div>
+                <div class="hud-item">
+                    <span class="hud-label">ENERGIA</span>
+                    <span class="hud-value" id="eval">0%</span>
+                </div>
+            </div>
+
+            <div id="canvas-wrapper">
+                <canvas id="gc"></canvas>
+                <div id="game-overlay">
+                    <div id="go-title"></div>
+                    <div id="go-sub"></div>
+                    <button class="abtn abtn-yellow" id="go-btn" style="min-width:200px"
+                        onclick="resumeOverlay()"></button>
+                    <button class="abtn-ghost" onclick="showScreen('screen-menu')">◀ MENU</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="jogo.js">
+
+    </script>
+</body>
+
+</html>
