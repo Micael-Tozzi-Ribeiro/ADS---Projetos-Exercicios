@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda — Gerenciador de Tarefas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="task.css">
+</head>
+
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div id="app">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <h1>minha agenda</h1>
+                <p class="subtitle" id="date-display">carregando...</p>
+            </div>
+            <div class="header-right">
+                <span id="clock">--:--</span>
+                <button class="theme-toggle" id="theme-toggle" type="button" title="Alternar modo claro/escuro">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                    <span class="toggle-icon" id="theme-icon">☀️</span>
+                    <span id="theme-label">Claro</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+            <div class="stat-card s-total">
+                <span class="glow-dot"></span>
+                <div class="n" id="s-total">0</div>
+                <div class="l">total</div>
+            </div>
+            <div class="stat-card s-pend">
+                <span class="glow-dot"></span>
+                <div class="n" id="s-pend">0</div>
+                <div class="l">pendentes</div>
+            </div>
+            <div class="stat-card s-done">
+                <span class="glow-dot"></span>
+                <div class="n" id="s-done">0</div>
+                <div class="l">concluídas</div>
+            </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress-wrap">
+            <div class="progress-label">
+                <span>progresso geral</span>
+                <span id="prog-pct">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+            </div>
+        </div>
+
+        <!-- ADD TASK -->
+        <div class="add-card">
+            <div class="add-row">
+                <input class="add-input" id="task-input" placeholder="Nova tarefa... (Enter para adicionar)"
+                    maxlength="140" autocomplete="off" />
+                <button class="add-btn" id="add-btn" type="button">＋ Adicionar</button>
+            </div>
+            <div class="meta-row">
+                <!-- Categoria -->
+                <select class="pill-select" id="cat-sel">
+                    <option value="work">💼 Trabalho</option>
+                    <option value="personal">🏡 Pessoal</option>
+                    <option value="study">📚 Estudo</option>
+                    <option value="health">💪 Saúde</option>
+                    <option value="other">✨ Outro</option>
+                </select>
+
+                <!-- Prazo -->
+                <select class="pill-select" id="due-sel">
+                    <option value="">📅 Sem prazo</option>
+                    <option value="hoje">📅 Hoje</option>
+                    <option value="amanhã">📅 Amanhã</option>
+                    <option value="esta semana">📅 Esta semana</option>
+                    <option value="este mês">📅 Este mês</option>
+                </select>
+
+                <!-- Prioridade — botões visuais (sem <select>) -->
+                <div class="prio-group" role="group" aria-label="Prioridade da tarefa">
+                    <button class="prio-btn" type="button" data-prio="high">🔴 Alta</button>
+                    <button class="prio-btn prio-active" type="button" data-prio="med">🟡 Média</button>
+                    <button class="prio-btn" type="button" data-prio="low">🟢 Baixa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input class="search-input" id="search-input" placeholder="Pesquisar tarefas..." autocomplete="off" />
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+            <button class="filter-btn active" type="button" data-f="all">Todas</button>
+            <button class="filter-btn" type="button" data-f="pending">⏳ Pendentes</button>
+            <button class="filter-btn" type="button" data-f="work">💼 Trabalho</button>
+            <button class="filter-btn" type="button" data-f="personal">🏡 Pessoal</button>
+            <button class="filter-btn" type="button" data-f="study">📚 Estudo</button>
+            <button class="filter-btn" type="button" data-f="health">💪 Saúde</button>
+            <button class="filter-btn" type="button" data-f="high">🔴 Alta prioridade</button>
+        </div>
+
+        <!-- PENDING -->
+        <div class="section-title">pendentes</div>
+        <div class="task-list" id="pend-list"></div>
+
+        <!-- DONE -->
+        <div class="done-section" id="done-section" style="display:none">
+            <div class="section-title">concluídas</div>
+            <div class="task-list" id="done-list"></div>
+        </div>
+
+    </div><!-- /#app -->
+
+    <script src="task.js">
+
+    </script>
+</body>
+
+</html>
