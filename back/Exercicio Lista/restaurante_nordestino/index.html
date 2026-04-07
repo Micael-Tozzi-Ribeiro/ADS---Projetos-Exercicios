@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempero do Sertão - Restaurante Nordestino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Baloo+2:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-logo">🌵 Tempero do Sertão</div>
+        <div class="loader-sub">RESTAURANTE NORDESTINO</div>
+        <div class="loader-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-logo" onclick="showPage('home')">
+            <span>🌵</span> Tempero do Sertão
+        </div>
+        <button class="hamburger" onclick="toggleMobileMenu()" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a onclick="showPage('home')" id="nav-home" class="active">🏠 Início</a>
+            <a onclick="showPage('cardapio')" id="nav-cardapio">🍽️ Cardápio</a>
+            <a onclick="showPage('contato')" id="nav-contato">📞 Contato</a>
+            <a onclick="showPage('conta')" id="nav-conta">👤 Minha Conta</a>
+        </div>
+        <button class="nav-cart ripple-wrapper" onclick="toggleCart()" id="cartBtn">
+            🛒 Carrinho
+            <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+        </button>
+    </nav>
+
+    <!-- ===== HOME ===== -->
+    <div class="page active" id="page-home">
+        <section class="hero">
+            <div class="hero-bg-pattern"></div>
+            <div class="hero-sun"></div>
+            <div class="hero-content">
+                <div class="hero-eyebrow">🤠 Autêntico sabor nordestino</div>
+                <h1 class="hero-title">
+                    O melhor do<br><span class="highlight">Sertão</span><br>na sua mesa
+                </h1>
+                <p class="hero-desc">
+                    Receitas centenárias, temperos da vovó e o calor do povo nordestino em cada prato.
+                    Do cozido às tapiocas, venha viver essa experiência!
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="showPage('cardapio')">🍽️ Ver Cardápio</button>
+                    <button class="btn-secondary" onclick="showPage('contato')">📍 Como Chegar</button>
+                </div>
+            </div>
+            <div class="hero-floating-cards">
+                <div class="float-card">
+                    <div class="float-card-icon">⭐</div>
+                    <div class="float-card-text"><strong>4.9 / 5.0</strong>+2.400 avaliações</div>
+                </div>
+                <div class="float-card">
+                    <div class="float-card-icon">🚴</div>
+                    <div class="float-card-text"><strong>Delivery Rápido</strong>Até 45 minutos</div>
+                </div>
+                <div class="float-card">
+                    <div class="float-card-icon">🏆</div>
+                    <div class="float-card-text"><strong>Melhor do Nordeste</strong>Premiado em 2024</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIAS -->
+        <section class="home-categories">
+            <div class="section-header">
+                <span class="section-eyebrow">Explore o cardápio</span>
+                <h2 class="section-title">O que você vai querer?</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="categories-grid">
+                <div class="cat-card" onclick="filterAndGo('prato-principal')">
+                    <span class="emoji">🍖</span>
+                    <h3>Pratos Principais</h3>
+                    <p>Cozidos e assados</p>
+                </div>
+                <div class="cat-card" onclick="filterAndGo('tapioca')">
+                    <span class="emoji">🫓</span>
+                    <h3>Tapiocas</h3>
+                    <p>Doces e salgadas</p>
+                </div>
+                <div class="cat-card" onclick="filterAndGo('bebida')">
+                    <span class="emoji">🥤</span>
+                    <h3>Bebidas</h3>
+                    <p>Sucos e refrescos</p>
+                </div>
+                <div class="cat-card" onclick="filterAndGo('sobremesa')">
+                    <span class="emoji">🍮</span>
+                    <h3>Sobremesas</h3>
+                    <p>Doces típicos</p>
+                </div>
+                <div class="cat-card" onclick="filterAndGo('petisco')">
+                    <span class="emoji">🫘</span>
+                    <h3>Petiscos</h3>
+                    <p>Para começar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESTAQUES -->
+        <section class="featured-section">
+            <div class="section-header">
+                <span class="section-eyebrow">Os preferidos</span>
+                <h2 class="section-title">Pratos em Destaque</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="products-row" id="featured-products"></div>
+        </section>
+
+        <!-- BANNER -->
+        <div class="nordeste-banner">
+            <div class="nordeste-banner-text">
+                <h2>🌟 Peça agora e receba em casa!</h2>
+                <p>Delivery disponível de Seg–Sex das 11h às 22h e Sáb–Dom das 10h às 23h</p>
+            </div>
+            <div class="banner-emoji">🌵</div>
+        </div>
+
+        <footer>
+            <div class="footer-logo">🌵 Tempero do Sertão</div>
+            <p>Rua do Açude, 247 — Fortaleza, CE</p>
+            <p>📞 (85) 9 9999-8888 | ✉️ contato@temperodosertao.com.br</p>
+            <div class="footer-credits">© 2025 Tempero do Sertão — Todos os direitos reservados</div>
+        </footer>
+    </div>
+
+    <!-- ===== CARDÁPIO ===== -->
+    <div class="page" id="page-cardapio">
+        <div class="cardapio-header">
+            <h1>🍽️ Nosso Cardápio</h1>
+            <p>Temperos autênticos, sabor de verdade — feito com amor do Sertão</p>
+        </div>
+        <div class="cardapio-filters" id="cardapio-filters">
+            <button class="filter-btn active" onclick="setFilter('todos', this)">Todos</button>
+            <button class="filter-btn" onclick="setFilter('prato-principal', this)">🍖 Pratos Principais</button>
+            <button class="filter-btn" onclick="setFilter('tapioca', this)">🫓 Tapiocas</button>
+            <button class="filter-btn" onclick="setFilter('petisco', this)">🫘 Petiscos</button>
+            <button class="filter-btn" onclick="setFilter('bebida', this)">🥤 Bebidas</button>
+            <button class="filter-btn" onclick="setFilter('sobremesa', this)">🍮 Sobremesas</button>
+            <div class="cardapio-search">
+                <span>🔍</span>
+                <input type="text" placeholder="Buscar prato..." id="search-input" oninput="filterProducts()">
+            </div>
+        </div>
+        <div class="cardapio-grid" id="cardapio-grid"></div>
+
+        <footer>
+            <div class="footer-logo">🌵 Tempero do Sertão</div>
+            <p>Rua do Açude, 247 — Fortaleza, CE</p>
+            <div class="footer-credits">© 2025 Tempero do Sertão</div>
+        </footer>
+    </div>
+
+    <!-- ===== CONTA ===== -->
+    <div class="page" id="page-conta">
+        <!-- Login / Cadastro -->
+        <div id="auth-view">
+            <div class="auth-page">
+                <div class="auth-card">
+                    <div class="auth-logo">
+                        <span class="big-emoji">🌵</span>
+                        <h2>Tempero do Sertão</h2>
+                        <p>Entre na sua conta para acessar pedidos e mais</p>
+                    </div>
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" onclick="switchAuthTab('login', this)">Entrar</button>
+                        <button class="auth-tab" onclick="switchAuthTab('cadastro', this)">Criar Conta</button>
+                    </div>
+
+                    <!-- LOGIN -->
+                    <div id="tab-login">
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" class="form-input" id="login-email" placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-input" id="login-password" placeholder="••••••••">
+                        </div>
+                        <div class="error-msg" id="login-error">E-mail ou senha incorretos!</div>
+                        <button class="btn-login" onclick="doLogin()">Entrar →</button>
+                        <div class="auth-hint">💡 Admin: micael@gmail.com / 123456</div>
+                    </div>
+
+                    <!-- CADASTRO -->
+                    <div id="tab-cadastro" style="display:none">
+                        <div class="form-group">
+                            <label>Nome completo</label>
+                            <input type="text" class="form-input" id="reg-name" placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" class="form-input" id="reg-email" placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-input" id="reg-password" placeholder="Min. 6 caracteres">
+                        </div>
+                        <div class="success-msg" id="reg-success">Conta criada! Faça login.</div>
+                        <div class="error-msg" id="reg-error">Preencha todos os campos!</div>
+                        <button class="btn-login" onclick="doRegister()">Criar Conta →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil do usuário -->
+        <div id="user-view" style="display:none">
+            <div class="conta-page">
+                <div class="conta-header">
+                    <div class="conta-avatar" id="conta-avatar">M</div>
+                    <div>
+                        <div class="conta-name" id="conta-name">Micael</div>
+                        <div class="conta-role" id="conta-role">⭐ Administrador</div>
+                        <div style="margin-top:8px;font-size:0.85rem;opacity:0.7" id="conta-email">micael@gmail.com
+                        </div>
+                    </div>
+                </div>
+                <div class="conta-cards">
+                    <div class="conta-stat">
+                        <div class="stat-num" id="conta-orders">3</div>
+                        <div class="stat-label">Pedidos realizados</div>
+                    </div>
+                    <div class="conta-stat">
+                        <div class="stat-num">⭐ 4.9</div>
+                        <div class="stat-label">Avaliação média</div>
+                    </div>
+                    <div class="conta-stat">
+                        <div class="stat-num">VIP</div>
+                        <div class="stat-label">Nível fidelidade</div>
+                    </div>
+                </div>
+
+                <!-- ADM PANEL -->
+                <div id="adm-panel" style="display:none">
+                    <div class="adm-section">
+                        <h3>🛠️ Painel Administrador — Adicionar Produto</h3>
+                        <div class="adm-form">
+                            <div class="form-group">
+                                <label>Nome do Produto</label>
+                                <input type="text" class="form-input" id="adm-name"
+                                    placeholder="Ex: Carne de Sol Especial">
+                            </div>
+                            <div class="form-group">
+                                <label>Preço (R$)</label>
+                                <input type="number" class="form-input" id="adm-price" placeholder="0.00" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="adm-category">
+                                    <option value="prato-principal">🍖 Prato Principal</option>
+                                    <option value="tapioca">🫓 Tapioca</option>
+                                    <option value="petisco">🫘 Petisco</option>
+                                    <option value="bebida">🥤 Bebida</option>
+                                    <option value="sobremesa">🍮 Sobremesa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Emoji</label>
+                                <input type="text" class="form-input" id="adm-emoji" placeholder="🍖" maxlength="2">
+                            </div>
+                            <div class="form-group full">
+                                <label>Descrição</label>
+                                <textarea id="adm-desc"
+                                    style="width:100%;padding:12px 14px;border:2px solid var(--bege-areia);border-radius:12px;font-family:Baloo 2,sans-serif;font-size:0.95rem;outline:none;resize:vertical;background:var(--creme)"
+                                    rows="3" placeholder="Descreva o prato..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tempo de preparo</label>
+                                <input type="text" class="form-input" id="adm-time" placeholder="Ex: 30 min">
+                            </div>
+                            <div class="form-group">
+                                <label>Calorias</label>
+                                <input type="text" class="form-input" id="adm-cal" placeholder="Ex: 450 kcal">
+                            </div>
+                            <div class="full" style="display:flex;gap:12px;margin-top:4px">
+                                <button class="btn-adm" onclick="addProduct()">✅ Adicionar ao Cardápio</button>
+                            </div>
+                        </div>
+                        <div class="success-msg" id="adm-success">✅ Produto adicionado com sucesso!</div>
+                        <div class="error-msg" id="adm-error">⚠️ Preencha todos os campos obrigatórios!</div>
+                    </div>
+                </div>
+
+                <!-- Pedidos -->
+                <div class="adm-section">
+                    <h3>📦 Meus Pedidos</h3>
+                    <div class="orders-list" id="orders-list">
+                        <div class="order-item">
+                            <div>
+                                <div style="font-weight:700;color:var(--marrom-terra)">Carne de Sol com Macaxeira</div>
+                                <div style="font-size:0.82rem;color:#888">20 Mar 2025 • R$ 42,90</div>
+                            </div>
+                            <span class="order-status">✅ Entregue</span>
+                        </div>
+                        <div class="order-item">
+                            <div>
+                                <div style="font-weight:700;color:var(--marrom-terra)">Baião de Dois + Sucos</div>
+                                <div style="font-size:0.82rem;color:#888">14 Mar 2025 • R$ 67,50</div>
+                            </div>
+                            <span class="order-status">✅ Entregue</span>
+                        </div>
+                        <div class="order-item">
+                            <div>
+                                <div style="font-weight:700;color:var(--marrom-terra)">Tapioca de Queijo Coalho (2x)
+                                </div>
+                                <div style="font-size:0.82rem;color:#888">8 Mar 2025 • R$ 28,00</div>
+                            </div>
+                            <span class="order-status">✅ Entregue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-logout" onclick="doLogout()">🚪 Sair da conta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTATO ===== -->
+    <div class="page" id="page-contato">
+        <div
+            style="background:linear-gradient(135deg,var(--marrom-terra),var(--terracota));padding:3rem 2rem;text-align:center;position:relative;overflow:hidden">
+            <div
+                style="position:absolute;inset:0;opacity:0.08;background:repeating-linear-gradient(60deg,var(--amarelo-sol) 0,var(--amarelo-sol) 1px,transparent 1px,transparent 30px)">
+            </div>
+            <h1
+                style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:white;position:relative">
+                📞 Fale Conosco</h1>
+            <p style="color:rgba(255,255,255,0.8);margin-top:8px;font-size:1.05rem">Estamos aqui para te atender com
+                todo o carinho do Nordeste</p>
+        </div>
+
+        <div class="contato-page">
+            <div class="contato-grid">
+                <div class="contato-info">
+                    <h2>🌵 Nos Encontre</h2>
+                    <div class="contato-item">
+                        <div class="contato-icon">📍</div>
+                        <div class="contato-item-text">
+                            <strong>Endereço</strong>
+                            <span>Rua do Açude, 247 — Aldeota<br>Fortaleza, Ceará – CEP 60150-270</span>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon">📞</div>
+                        <div class="contato-item-text">
+                            <strong>Telefone / WhatsApp</strong>
+                            <span>(85) 9 9999-8888</span>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon">✉️</div>
+                        <div class="contato-item-text">
+                            <strong>E-mail</strong>
+                            <span>contato@temperodosertao.com.br</span>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon">⏰</div>
+                        <div class="contato-item-text">
+                            <strong>Horário de Funcionamento</strong>
+                            <span>Seg–Sex: 11h às 22h<br>Sáb–Dom: 10h às 23h</span>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <div class="contato-icon">🚴</div>
+                        <div class="contato-item-text">
+                            <strong>Delivery</strong>
+                            <span>Até 8km do centro<br>Pedido mínimo: R$ 30,00</span>
+                        </div>
+                    </div>
+                    <!-- Redes -->
+                    <div style="display:flex;gap:12px;margin-top:16px">
+                        <div style="background:rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;cursor:pointer;transition:all 0.3s;font-weight:700;font-size:0.85rem"
+                            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+                            onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                            📸 Instagram
+                        </div>
+                        <div style="background:rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;cursor:pointer;transition:all 0.3s;font-weight:700;font-size:0.85rem"
+                            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+                            onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                            💬 WhatsApp
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contato-form-card">
+                    <h2>💬 Envie uma mensagem</h2>
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-input" id="cont-name" placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" class="form-input" id="cont-email" placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Assunto</label>
+                        <select class="form-input" id="cont-subject">
+                            <option>Elogio / Feedback</option>
+                            <option>Reclamação</option>
+                            <option>Informações sobre o cardápio</option>
+                            <option>Reserva de mesa</option>
+                            <option>Parceria / Eventos</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea class="form-input" id="cont-msg" rows="5"
+                            placeholder="Escreva sua mensagem..."></textarea>
+                    </div>
+                    <div class="success-msg" id="cont-success" style="margin-bottom:10px">✅ Mensagem enviada!
+                        Retornaremos em breve.</div>
+                    <div class="error-msg" id="cont-error" style="margin-bottom:10px">⚠️ Por favor, preencha todos os
+                        campos.</div>
+                    <button class="btn-enviar" onclick="sendContact()">Enviar Mensagem 🌵</button>
+                </div>
+            </div>
+
+            <!-- MAPA DECORATIVO -->
+            <div
+                style="margin-top:32px;background:linear-gradient(135deg,var(--bege-areia),white);border-radius:24px;padding:32px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.06)">
+                <h3
+                    style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--marrom-terra);margin-bottom:8px">
+                    🗺️ Nossa Localização</h3>
+                <p style="color:#888;font-size:0.9rem;margin-bottom:20px">Rua do Açude, 247 — Aldeota, Fortaleza – CE
+                </p>
+                <div
+                    style="background:linear-gradient(135deg,#C1440E22,#F5A62322);border-radius:16px;padding:48px;font-size:3rem;position:relative;overflow:hidden">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(193,68,14,0.05),rgba(245,166,35,0.05))">
+                    </div>
+                    📍
+                    <div style="font-size:0.9rem;margin-top:12px;color:var(--marrom-terra);font-weight:700">Clique para
+                        abrir no Maps</div>
+                    <div style="font-size:0.8rem;color:#888">Fortaleza, Ceará, Brasil</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-logo">🌵 Tempero do Sertão</div>
+            <p>Rua do Açude, 247 — Fortaleza, CE</p>
+            <div class="footer-credits">© 2025 Tempero do Sertão</div>
+        </footer>
+    </div>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>🛒 Seu Carrinho</h2>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items-list">
+            <div class="cart-empty">
+                <span class="emoji">🛒</span>
+                <p>Seu carrinho está vazio</p>
+                <p style="font-size:0.8rem;margin-top:4px">Adicione itens do cardápio!</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total</strong>
+                <span class="cart-total-value" id="cart-total">R$ 0,00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Finalizar Pedido 🌵</button>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js">
+
+    </script>
+</body>
+
+</html>
