@@ -73,18 +73,19 @@ const LEVEL_NAMES = [
     'ACID RAIN', 'THUNDER', 'BLIZZARD',
     'TOXIC SKY', 'ECLIPSE', 'SOLAR STORM'
 ];
-const BASE_SPD = 1.1, SPD_INC = 0.20;
+const BASE_SPD = 1.6, SPD_INC = 0.18;  // enemy base & per-level increment
 
 function buildLevelGrid() {
     const g = document.getElementById('levels-grid');
     g.innerHTML = '';
     for (let i = 1; i <= 9; i++) {
-        const spd = (BASE_SPD + (i - 1) * SPD_INC).toFixed(1);
+        const espd = (BASE_SPD + (i - 1) * SPD_INC).toFixed(1);
+        const pspd = (3.2 + (i - 1) * 0.15).toFixed(1);
         const d = document.createElement('div');
         d.className = 'lcard';
         d.innerHTML = `<span class="lnum">${String(i).padStart(2, '0')}</span>
-         <span class="lname">${LEVEL_NAMES[i - 1]}</span>
-         <span class="lspd">VEL ${spd}</span>`;
+                 <span class="lname">${LEVEL_NAMES[i - 1]}</span>
+                 <span class="lspd">PAINEL ${pspd} / INI ${espd}</span>`;
         d.onclick = () => goGame(i);
         g.appendChild(d);
     }
@@ -130,7 +131,10 @@ const D4 = [{ x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }];
 const md = (ax, ay, bx, by) => Math.abs(ax - bx) + Math.abs(ay - by);
 
 // Speed constants
-const P_BASE = 2.2, P_BOOST = 0.08, P_MAX = 3.9, P_DECAY = 0.004, P_PWR_BONUS = 0.5;
+// Player speed — base grows per level, boost on collect, cap scales too
+const P_BOOST = 0.18, P_DECAY = 0.002, P_PWR_BONUS = 0.8;
+function P_BASE() { return 3.2 + (level - 1) * 0.15; }
+function P_MAX() { return 5.4 + (level - 1) * 0.15; }
 
 // ── START GAME ─────────────────────────────
 function goGame(startLv) {
@@ -161,7 +165,7 @@ function spawnPlayer() {
         tx: 10, ty: 16,
         px: 10 * SZ + SZ / 2, py: 16 * SZ + SZ / 2,
         dx: 0, dy: 0, ndx: 1, ndy: 0,
-        curSpd: P_BASE, powered: false,
+        curSpd: P_BASE(), powered: false,
         boosted: false, boostTick: 0
     };
 }
@@ -188,10 +192,10 @@ function spawnEnemies() {
 
 // ── PLAYER STEP ────────────────────────────
 function stepPlayer() {
-    // speed decay
-    if (player.curSpd > P_BASE) player.curSpd = Math.max(P_BASE, player.curSpd - P_DECAY);
+    // speed decay back to base
+    if (player.curSpd > P_BASE()) player.curSpd = Math.max(P_BASE(), player.curSpd - P_DECAY);
 
-    const actualSpd = Math.min(player.curSpd + (player.powered ? P_PWR_BONUS : 0), P_MAX + (player.powered ? P_PWR_BONUS : 0));
+    const actualSpd = Math.min(player.curSpd + (player.powered ? P_PWR_BONUS : 0), P_MAX() + (player.powered ? P_PWR_BONUS : 0));
 
     // direction change
     if (!isWall(player.tx + player.ndx, player.ty + player.ndy)) {
@@ -216,12 +220,12 @@ function stepPlayer() {
     const cell = map[player.ty][player.tx];
     if (cell === 2) {
         map[player.ty][player.tx] = 0; score += 10; eaten++;
-        player.curSpd = Math.min(player.curSpd + P_BOOST, P_MAX);
+        player.curSpd = Math.min(player.curSpd + P_BOOST, P_MAX());
         player.boosted = true; player.boostTick = 10;
     } else if (cell === 3) {
         map[player.ty][player.tx] = 0; score += 50; eaten++;
         pTimer = 420; player.powered = true;
-        player.curSpd = Math.min(player.curSpd + P_BOOST * 4, P_MAX);
+        player.curSpd = Math.min(player.curSpd + P_BOOST * 4, P_MAX());
         enemies.forEach(e => { if (!e.inHouse && !e.dead) e.scared = true; });
     }
 
@@ -290,7 +294,7 @@ function checkHits() {
 }
 
 function hitPlayer() {
-    lives--; player.curSpd = P_BASE; updateHUD();
+    lives--; player.curSpd = P_BASE(); updateHUD();
     if (lives <= 0) {
         running = false;
         showGameOverlay('PAINEL DESTRUIDO!', `SCORE FINAL: ${score}`, 'TENTAR NOVAMENTE', () => goGame(level));
@@ -552,7 +556,7 @@ function drawPowerBar() {
 }
 
 function drawSpeedBar() {
-    const ratio = (player.curSpd - P_BASE) / (P_MAX - P_BASE);
+    const ratio = (player.curSpd - P_BASE()) / (P_MAX() - P_BASE());
     if (ratio <= 0.01) return;
     const bw = 72, bh = 3, bx = GAME_W - bw - 5, by = 7;
     ctx.fillStyle = 'rgba(0,0,0,.5)'; ctx.fillRect(bx - 1, by - 1, bw + 2, bh + 2);
