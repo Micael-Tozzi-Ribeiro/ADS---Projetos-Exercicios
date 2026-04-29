@@ -1,42 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Tabela Moderna</title>
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarTech | Gestão de Clientes</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <header>
+    <h1>☀️ Energia Solar Inteligente</h1>
+    <p>Reduza sua conta de energia, valorize seu imóvel e contribua para um futuro mais sustentável com soluções em painéis solares de alta eficiência.</p>
+  </header>
 
-<h1>📊 Tabela + Top</h1>
+  <main class="container">
+    <section class="benefits">
+      <div class="benefit-card">
+        <h3>💰 Economia</h3>
+        <p>Reduza em até 95% seus gastos com energia elétrica.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>🌱 Sustentabilidade</h3>
+        <p>Energia limpa, renovável e amiga do meio ambiente.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>📈 Valorização</h3>
+        <p>Seu imóvel ganha mais valor e atratividade no mercado.</p>
+      </div>
+    </section>
 
-<div class="container">
+    <section class="card">
+      <h2 class="section-title">📋 Cadastro de Clientes Interessados</h2>
 
-    <div class="form">
-        <input type="text" id="nome" placeholder="Nome">
-        <input type="number" id="idade" placeholder="Idade">
-        <button onclick="adicionar()">➕ Adicionar</button>
-    </div>
+      <div class="form">
+        <input type="text" id="nome" placeholder="Nome do cliente" />
+        <input type="number" id="idade" placeholder="Idade" />
+        <button class="add-btn" onclick="adicionar()">➕ Adicionar</button>
+      </div>
 
-    <input class="search" type="text" id="filtro" placeholder="🔍 Buscar..." onkeyup="filtrar()">
+      <input
+        class="search"
+        type="text"
+        id="filtro"
+        placeholder="🔍 Buscar cliente por nome ou idade..."
+        onkeyup="filtrar()"
+      />
 
-    <table id="tabela">
+      <table id="tabela">
         <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Ações</th>
-            </tr>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Ações</th>
+          </tr>
         </thead>
         <tbody></tbody>
-    </table>
+      </table>
+    </section>
+  </main>
 
-</div>
+  <footer>
+    <p>© 2026 SolarTech Energia Solar - Transformando luz em economia.</p>
+  </footer>
 
-<script src="script.js">
-
-</script>
-
+  <script src="script.js">
+ 
+  </script>
 </body>
 </html>
